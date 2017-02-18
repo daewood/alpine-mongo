@@ -1,9 +1,10 @@
 FROM alpine:edge
+MAINTAINER daewood <daewood@qq.com>
 
 RUN \
 echo http://dl-4.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
-apk add --no-cache mongodb && \
-mkdir /data/db && chown mongodb:mongodb /data/db && \
+apk --update add mongodb && \
+chown mongodb:mongodb /data/db && \
 rm /usr/bin/mongosniff /usr/bin/mongoperf && \
 rm -rf /var/cache/apk/* /src
 

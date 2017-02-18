@@ -1,5 +1,12 @@
 #!/bin/sh
-# Docker entrypoint (pid 1), run as root
+
+# first arg is `-f` or `--some-option`
+# or first arg is `something.conf`
+if [ "${1#-}" != "$1" ] || [ "${1%.conf}" != "$1" ]; then
+	set -- mongod "$@"
+fi
+
+# Docker entryposnt (psd 1), run as root
 [ "$1" = "mongod" ] || exec "$@" || exit $?
 
 # Make sure that database is owned by user mongodb
